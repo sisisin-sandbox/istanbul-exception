@@ -1,15 +1,16 @@
+const files = process.argv[4] === 'cov' ? ['.tmp/test/**-spec.js'] : ['src/index.ts', 'test/**-spec.ts'];
+console.log(files)
+
 module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['mocha'],
-    files: [
-      'src/index.ts',
-      'test/**-spec.ts'
-    ],
+    files: files,
     exclude: [],
     preprocessors: {
       'src/index.ts': ['webpack'],
-      'test/**-spec.ts': ['webpack']
+      'test/**-spec.ts': ['webpack'],
+      '.tmp/test/**-spec.js': ['webpack']
     },
     webpack: {
       entry: {},
@@ -22,16 +23,15 @@ module.exports = function (config) {
       },
       module: {
         loaders: [
-          { test: /\.ts$/, loaders: ['webpack-espower-loader', 'ts-loader'] },
-          { test: /\.json$/, loader: 'json' }
+          { test: /\.ts$/, loaders: ['ts-loader'] },
         ],
         postLoaders: [
           {
-            test: /\.ts$/,
-            loader: 'istanbul-instrumenter-loader',
+            test: /\.js$/,
+            loader: 'istanbul-instrumenter',
             exclude: [
-              'node_modules',
-              /\-spec\.ts$/
+              /node_modules/,
+              /-spec\.js$/
             ]
           }
         ]
@@ -43,10 +43,10 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
+    singleRun: true,
     concurrency: Infinity,
     coverageReporter: {
-      type: 'html'
+      type: 'json'
     }
   })
 }

@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start --single-run",
+    "test": "karma start",
+    "test:cov": "tsc && karma start karma.conf.js cov",
     "test:w": "karma start --watch",
     "build": "webpack",
     "build:w": "webpack -w",
-    "watch": "npm-run-all --parallel test:w build:w"
+    "watch": "npm-run-all --parallel test:w build:w",
+    "cov": "remap-istanbul -i ./coverage/*/coverage-final.json -o coverage-report -t html"
   },
   "author": "",
   "license": "MIT",

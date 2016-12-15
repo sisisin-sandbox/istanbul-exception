@@ -6,4 +6,5 @@ typings/
 .tmp/
 dist/
 coverage/
+coverage-report/
 

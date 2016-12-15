@@ -1,4 +1,4 @@
-import * as assert from 'power-assert';
+import * as assert from 'assert';
 import { HelloService } from '../src/modules/service';
 
 describe('HelloService', () => {
@@ -7,7 +7,7 @@ describe('HelloService', () => {
   it('return "hello"', () => {
     assert('hello service' === sut.hello()); 
   });
-  // it('return empty entity', () => {
-  //   assert.deepStrictEqual({hogeStr: '', fugaNum: null }, sut.entity());
-  // });
+  it('return empty entity', () => {
+    assert.deepStrictEqual({hogeStr: '', fugaNum: null }, sut.entity());
+  });
 });
